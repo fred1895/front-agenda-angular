@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContatoService } from '../contato.service';
-import { Contato } from './contato';
 
 @Component({
   selector: 'app-contato',
@@ -10,19 +10,22 @@ import { Contato } from './contato';
 export class ContatoComponent implements OnInit {
 
   nome: string;
-
+  formulario: FormGroup;
   constructor(
-    private service: ContatoService
+    private service: ContatoService,
+    private formBuilder: FormBuilder,
   ) {
     this.nome = 'fred';
    }
 
   ngOnInit(): void {
-    const c : Contato = new Contato();
-    c.nome = this.nome;
-    c.email = "fred@gmail.com";
-    c.favorito = false;
-
+    this.formulario = this
+    .formBuilder
+    .group({
+      nome: ['', Validators.required],
+      email: ['', Validators.email],
+    })
+    /*
     this.service
     .save(c)
     .subscribe( response => {
@@ -30,6 +33,11 @@ export class ContatoComponent implements OnInit {
     }, erroResponse => {
       console.log(erroResponse);
     })
+    */
+  }
+
+  submit(): void{
+     console.log(this.formulario.value);
   }
 
 }

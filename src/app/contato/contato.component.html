@@ -1,14 +1,14 @@
 <mat-toolbar>
     <span>Contatos</span>
 </mat-toolbar>
-<form>
+<form [formGroup]="formulario" (ngSubmit)="submit()">
     <mat-form-field class="full-width">
         <mat-label>Nome:</mat-label>
-        <input matInput placeholder="Digite o seu nome: " type="text" name="nome" id="">
+        <input matInput formControlName="nome" placeholder="Digite o seu nome: " type="text" name="nome" id="">
     </mat-form-field>
     <mat-form-field class="full-width">
         <mat-label>Email:</mat-label>
-        <input matInput placeholder="Digite o seu email: " type="text" name="email" id="">
+        <input matInput formControlName="email" placeholder="Digite o seu email: " type="text" name="email" id="">
     </mat-form-field>    
 
     <button mat-button color="primary">
