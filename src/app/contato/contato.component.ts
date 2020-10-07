@@ -13,7 +13,7 @@ export class ContatoComponent implements OnInit {
   nome: string;
   formulario: FormGroup;
   contatos: Contato[] = [];
-  colunas: string[] = ['id', 'nome', 'email', 'favorito'];
+  colunas = ['id', 'nome', 'email', 'favorito'];
 
   constructor(
     private service: ContatoService,
@@ -42,6 +42,16 @@ export class ContatoComponent implements OnInit {
       .subscribe(response => {
         this.contatos = response;
         console.log(this.contatos);
+      })
+    }
+
+    favoritar(contato: Contato): void {
+      this.service
+      .favourite(contato)
+      .subscribe( response => {
+        console.log('Antes de apertar o botao' + contato.favorito);
+        contato.favorito = !contato.favorito;
+        console.log('Depois de apertar o botao' + contato.favorito);
       })
     }
 
