@@ -22,8 +22,8 @@ export class ContatoComponent implements OnInit {
     this.formulario = this
     .formBuilder
     .group({
-      nome: ['', Validators.required],
-      email: ['', Validators.email],
+      nome: ['', [Validators.required]],
+      email: ['', [Validators.email, Validators.required] ],
     })
     /*
     this.service
@@ -36,8 +36,31 @@ export class ContatoComponent implements OnInit {
     */
   }
 
+  nomeValido(): boolean{
+    if (
+      this.formulario.controls.nome.errors &&
+      this.formulario.controls.nome.errors.required 
+      ) {
+      return false; 
+    }
+    return true;
+  }
+
+  emailValido(): boolean{
+    if (
+      this.formulario.controls.email.errors &&
+      (this.formulario.controls.email.errors.required ||
+      this.formulario.controls.email.errors.email)
+    ) {
+      return false;
+    }
+    return true;
+  }
+
   submit(): void{
      console.log(this.formulario.value);
+     const isValid = this.formulario.valid;
+     console.log('isValid?', isValid);
   }
 
 }
