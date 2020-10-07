@@ -18,18 +18,32 @@ export class ContatoComponent implements OnInit {
   constructor(
     private service: ContatoService,
     private formBuilder: FormBuilder,
-  ) {
-    this.nome = 'fred';
-   }
+    ) {
+      this.nome = 'fred';
+    }
+    
+    ngOnInit(): void {
+      this.montarFormulario();
+      this.listarContatos();
+    }
 
-  ngOnInit(): void {
-    this.formulario = this
-    .formBuilder
-    .group({
-      nome: ['', [Validators.required]],
-      email: ['', [Validators.email, Validators.required] ],
-    })
-  }
+    montarFormulario(): void {
+      this.formulario = this
+      .formBuilder
+      .group({
+        nome: ['', [Validators.required]],
+        email: ['', [Validators.email, Validators.required] ],
+      })
+    }
+
+    listarContatos(): void {
+      this.service
+      .list()
+      .subscribe(response => {
+        this.contatos = response;
+        console.log(this.contatos);
+      })
+    }
 
   nomeValido(): boolean{
     if (
@@ -64,5 +78,6 @@ export class ContatoComponent implements OnInit {
       console.log(erroResponse);
     })
   }
+
 
 }
