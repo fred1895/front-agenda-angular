@@ -82,7 +82,8 @@ export class ContatoComponent implements OnInit {
     this.service
     .save(contato)
     .subscribe( response => {
-      this.contatos.push(response);
+      let lista: Contato[] = [...this.contatos, response];
+      this.contatos = lista;
       console.log(this.contatos);
     }, erroResponse => {
       console.log(erroResponse);
