@@ -7,13 +7,14 @@
             </mat-icon>
             Contato
         </mat-card-title>
-        <img 
-        mat-card-image
-        src="data:image/jpg;base64,{{ contato.foto }}" alt="Foto do contato">
     </mat-card-header>
+    <img 
+    class="foto"
+    mat-card-image
+    src="data:image/jpg;base64,{{contato.foto}}"/>
     <mat-card-content>
         <p>
-            <strong> {{ contato.nome }} </strong>
+            <strong> {{ contato.nome }} </strong> <br>
             <strong> {{ contato.email }} </strong>
         </p>
     </mat-card-content>
